@@ -1,7 +1,5 @@
 package in.home.app;
 
-import javax.naming.NamingException;
-
 import in.home.app.services.LdapOpsService;
 
 /**
@@ -14,11 +12,20 @@ public class App {
 
 		LdapOpsService ldapOpsService = new LdapOpsService();
 		ldapOpsService.connectLdap();
-		try {
-			ldapOpsService.getAllUsers();
-		} catch (NamingException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+
+		// ldapOpsService.addUser();
+
+//		ldapOpsService.getAllUsers();
+
+//		ldapOpsService.addUserToGroup("Sita", "jira-users");
+//		ldapOpsService.deleteUserFromGroup("Sita", "jira-users");
+
+		ldapOpsService.searchUsers(3);
+		boolean valid = ldapOpsService.authenticateUser("Sita", "password");
+		if (valid) {
+			System.out.println("Valid user");
+		} else {
+			System.out.println("Invalid credentials");
 		}
 	}
 }
